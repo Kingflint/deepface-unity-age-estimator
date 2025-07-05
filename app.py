@@ -1,30 +1,31 @@
 from flask import Flask, request, jsonify
-from deepface import DeepFace
-from io import BytesIO
 import base64
-from PIL import Image
+import cv2
 import numpy as np
+from deepface import DeepFace
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return "✅ DeepFace Age Estimator is Live!"
-
-@app.route("/predict-age", methods=["POST"])
-def predict_age():
+@app.route("/analyze", methods=["POST"])
+def analyze():
     try:
-        data = request.json
-        image_data = base64.b64decode(data["image"])
-        img = Image.open(BytesIO(image_data)).convert("RGB")
-        img_arr = np.array(img)
+        req_data = request.get_json()
+        encoded_image = req_data.get("image")
 
-        result = DeepFace.analyze(img_arr, actions=["age"], enforce_detection=False)
-        age = result[0]["age"]
-        return jsonify({"status": "success", "age": int(age)})
+        if not encoded_image:
+            return jsonify({"error": "No image data provided"}), 400
+
+        # Decode base64 to image
+        image_data = base64.b64decode(encoded_image)
+        np_array = np.frombuffer(image_data, np.uint8)
+        img = cv2.imdecode(np_array, cv2.IMREAD_COLOR)
+
+        # Analyze using DeepFace
+        result = DeepFace.analyze(img, actions=['emotion', 'age', 'gender'], enforce_detection=False)
+
+        return jsonify({"result": result})
     except Exception as e:
-        return jsonify({"status": "error", "message": str(e)})
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    print("✅ Flask app has started")
-    app.run(host="0.0.0.0", port=5000)
+    app.run(debug=True)
