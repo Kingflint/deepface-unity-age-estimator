@@ -7,6 +7,10 @@ import numpy as np
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return "✅ DeepFace Age Estimator is Live!"
+
 @app.route("/predict-age", methods=["POST"])
 def predict_age():
     try:
@@ -22,4 +26,5 @@ def predict_age():
         return jsonify({"status": "error", "message": str(e)})
 
 if __name__ == "__main__":
+    print("✅ Flask app has started")
     app.run(host="0.0.0.0", port=5000)
