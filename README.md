@@ -1,3 +1,10 @@
 # DeepFace Unity Age Estimator
 
-Flask service for age, emotion and gender estimation from images.
+## Local Setup
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python app.py
+```
