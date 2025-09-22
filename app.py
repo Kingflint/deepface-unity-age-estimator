@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import base64
 
 app = Flask(__name__)
 
@@ -14,7 +15,8 @@ def analyze():
     encoded_image = req_data.get("image") if req_data else None
     if not encoded_image:
         return jsonify({"error": "No image data provided"}), 400
-    return jsonify({"received": True})
+    image_data = base64.b64decode(encoded_image)
+    return jsonify({"bytes": len(image_data)})
 
 
 if __name__ == "__main__":
