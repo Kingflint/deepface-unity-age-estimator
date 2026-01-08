@@ -4,3 +4,5 @@ tensorflow==2.19.0
 tf-keras==2.19.0
 Pillow
 numpy<2.0,>=1.24.0
+gunicorn>=21.2.0
+python-dotenv>=1.0.1
