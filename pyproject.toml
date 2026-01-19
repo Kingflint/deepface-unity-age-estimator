@@ -1,0 +1,20 @@
+[project]
+name = "deepface-unity-age-estimator"
+version = "0.5.0"
+description = "Flask backend for age, emotion and gender estimation, designed for a Unity client."
+readme = "README.md"
+requires-python = ">=3.10,<3.12"
+license = { text = "MIT" }
+authors = [{ name = "Flint", email = "Flintcheeze@yahoo.com" }]
+keywords = ["deepface", "flask", "unity", "computer-vision", "age-estimation"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
