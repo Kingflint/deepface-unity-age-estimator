@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>DeepFace Age Estimator demo</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; }
+    pre  { background: #111; color: #eee; padding: 1rem; overflow: auto; }
+    button, input[type=file] { font-size: 1rem; padding: .5rem 1rem; }
+  </style>
+</head>
+<body>
+  <h1>DeepFace Age Estimator</h1>
+  <p>Pick an image and POST it to <code>/analyze</code>.</p>
+  <input type="file" id="file" accept="image/*">
+  <button id="go">Analyze</button>
+  <pre id="out">(no result yet)</pre>
+  <script src="demo.js"></script>
+</body>
+</html>
