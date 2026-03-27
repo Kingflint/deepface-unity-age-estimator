@@ -1,5 +1,5 @@
 """DeepFace Age Estimator package."""
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 from .app_factory import create_app  # noqa: E402
 
