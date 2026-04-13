@@ -1,4 +1,9 @@
-"""Top-level entrypoint."""
+"""Top-level entrypoint.
+
+Kept at the project root for backwards compatibility with the original
+Render deployment (``startCommand: python app.py``). New deployments
+should prefer ``gunicorn wsgi:app``.
+"""
 from deepface_server import create_app
 from deepface_server.config import load_settings
 
