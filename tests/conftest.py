@@ -57,3 +57,16 @@ def app(settings):
 @pytest.fixture
 def client(app):
     return app.test_client()
+
+
+@pytest.fixture
+def make_app(settings):
+    """Factory fixture for tests that want to construct multiple apps."""
+
+    def _factory(**overrides):
+        from dataclasses import replace
+
+        local = replace(settings, **overrides) if overrides else settings
+        return create_app(local)
+
+    return _factory
