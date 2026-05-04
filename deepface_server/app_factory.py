@@ -54,16 +54,32 @@ def create_app(settings: Optional[Settings] = None) -> Flask:
 
     register_middleware(app, settings)
 
+    # Optional analyzer registry
+    try:
+        from .analyzers import build_default_registry
+
+        app.extensions["analyzer_registry"] = build_default_registry()
+    except Exception:  # pragma: no cover - defensive
+        app.extensions["analyzer_registry"] = None
+
     # Blueprints
+    from .blueprints.admin import admin_bp
     from .blueprints.analyze import analyze_bp
     from .blueprints.batch import batch_bp
     from .blueprints.health import health_bp
+    from .blueprints.history import history_bp
+    from .blueprints.jobs import jobs_bp
     from .blueprints.metrics import metrics_bp
+    from .blueprints.openapi import openapi_bp
 
     app.register_blueprint(health_bp)
     app.register_blueprint(analyze_bp)
     app.register_blueprint(batch_bp)
     app.register_blueprint(metrics_bp)
+    app.register_blueprint(history_bp)
+    app.register_blueprint(jobs_bp)
+    app.register_blueprint(admin_bp)
+    app.register_blueprint(openapi_bp)
 
     register_error_handlers(app)
     return app
