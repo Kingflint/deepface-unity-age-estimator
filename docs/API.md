@@ -6,13 +6,13 @@ All endpoints accept and return JSON unless noted otherwise.
 
 Liveness check.
 
-```json
+json
 { "message": "DeepFace API is running!" }
-```
+
 
 ## `GET /healthz`
 
-```json
+json
 {
   "status": "ok",
   "version": "0.5.0",
@@ -27,35 +27,34 @@ Liveness check.
     "max_batch_size": 8
   }
 }
-```
+
 
 ## `POST /analyze`
 
 Body:
 
-```json
+json
 { "image": "<base64-encoded jpg/png/webp>" }
-```
+
 
 `data:image/...;base64,` prefixes are accepted and stripped client-side
 or by the helper in [deepface_server/utils/base64_utils.py](../deepface_server/utils/base64_utils.py).
 
 200 response:
 
-```json
+json
 {
   "result": [
     { "age": 27, "dominant_gender": "Woman", "dominant_emotion": "happy" }
   ],
   "cached": false
 }
-```
 
 Error responses follow the same shape:
 
-```json
+json
 { "error": "No image data provided", "code": "bad_request" }
-```
+
 
 | Code                  | HTTP | When                                                      |
 |-----------------------|------|-----------------------------------------------------------|
@@ -71,15 +70,14 @@ Error responses follow the same shape:
 
 Body:
 
-```json
+json
 { "images": ["<b64>", "<b64>", "<b64>"] }
-```
 
 The array length must be in `[1, MAX_BATCH_SIZE]`.
 
 200 response:
 
-```json
+json
 {
   "results": [
     { "index": 0, "ok": true,  "cached": false, "result": [...] },
@@ -88,13 +86,13 @@ The array length must be in `[1, MAX_BATCH_SIZE]`.
   "succeeded": 1,
   "total": 2
 }
-```
+
 
 A failing image inside the batch does **not** fail the whole call.
 
 ## `GET /metrics`
 
-```json
+json
 {
   "requests": {
     "total_requests": 42,
@@ -105,7 +103,7 @@ A failing image inside the batch does **not** fail the whole call.
     "size": 17, "max_entries": 256, "hits": 8, "misses": 34, "hit_rate": 0.1905
   }
 }
-```
+
 
 ## Headers
 
