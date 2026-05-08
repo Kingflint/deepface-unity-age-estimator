@@ -1,0 +1,18 @@
+# GitHub Linguist overrides: this is a Python project. The Unity C# client and
+# documentation are auxiliary and should not skew language stats.
+
+unity_client/**       linguist-vendored
+docs/**               linguist-documentation
+static/**             linguist-vendored
+*.md                  linguist-documentation
+
+# Normalise line endings for source files
+*.py                  text eol=lf
+*.cs                  text eol=lf
+*.md                  text eol=lf
+*.yml                 text eol=lf
+*.yaml                text eol=lf
+*.toml                text eol=lf
+*.ini                 text eol=lf
+Dockerfile            text eol=lf
+Makefile              text eol=lf
