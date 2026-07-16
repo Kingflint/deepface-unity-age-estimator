@@ -15,7 +15,7 @@ RUN apt-get update \
 WORKDIR /app
 
 COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install --upgrade pip==24.2 && pip install -r requirements.txt
 
 COPY . .
 
